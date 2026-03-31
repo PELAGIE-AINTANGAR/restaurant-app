@@ -2,7 +2,6 @@
 const db = require('../db/db');
 
 
-//getall restaurants e
 async function getAllRestaurants() {
   const result = await db.query('SELECT * FROM restaurants');
   return result.rows;
@@ -22,20 +21,6 @@ async function createRestaurant(data) {
     [name, address, latitude, longitude, cuisine_type, phone_number]
   );
   return result.rows[0];
-}
-
-async function updateRestaurant(id, data) {
-  const { name, address, latitude, longitude, cuisine_type, phone_number } = data;
-  const result = await db.query(
-    'UPDATE restaurants SET name = $1, address = $2, latitude = $3, longitude = $4, cuisine_type = $5, phone_number = $6 WHERE id = $7 RETURNING *',
-    [name, address, latitude, longitude, cuisine_type, phone_number, id]
-  );
-  return result.rows[0];
-}
-
-async function deleteRestaurant(id) {
-  const result = await db.query('DELETE FROM restaurants WHERE id = $1', [id]);
-  return result.rowCount > 0;
 }
 
 
@@ -67,8 +52,6 @@ async function filterRestaurants(filters) {
 module.exports = {
   getAllRestaurants,
   createRestaurant,
-  updateRestaurant,
-  deleteRestaurant,
   searchRestaurants,
   filterRestaurants,
 };  

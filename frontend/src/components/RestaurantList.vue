@@ -20,10 +20,8 @@ const closeModal = () => {
 </script>
 <template>
     <div>
-        <!-- bouton pour ouvrir la modal -->
         <button @click="openModal">Voir la liste des restaurants</button>
 
-        <!-- overlay modal -->
         <div v-if="showModal" class="modal-overlay" @click.self="closeModal">
             <div class="modal-content">
                 <h2>Liste des Restaurants</h2>

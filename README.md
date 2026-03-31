@@ -1,4 +1,5 @@
 ## Gestionnaire de Restaurants
+
 Gestionnaire de Restaurants est une application qui permet de gérer des restaurants:
 
     - d'afficher Tous les restaurants dans un format tableau/liste(avec les informations necessaires)
@@ -37,6 +38,64 @@ Gestionnaire de Restaurants est une application qui permet de gérer des restaur
 
 ## Base de données
     - PostgreSQL (Stockage des informations des restaurants)
+
+    -Installer PostgreSQ
+        sudo apt update
+        sudo apt install postgresql postgresql-contrib
+
+    -vérifier la version
+        psql --version
+
+    -Démarrer PostgreSQL
+        sudo systemctl status postgresql
+
+    -activer automatiquement PostgreSQL au démarrage
+        sudo systemctl enable postgresql
+
+    - se mettre dans PostgreSQL
+        sudo -u postgres psql
+
+    -créer la base de données
+        CREATE DATABASE restaurants_db;
+
+    -voir la liste des bases
+        \l
+    -se connecter a la base créer
+        \c restaurants_db
+        
+    -créer la table restaurants
+        CREATE TABLE restaurants (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        address VARCHAR(500) NOT NULL,
+        latitude DECIMAL(10,8) NOT NULL,
+        longitude DECIMAL(11,8) NOT NULL,
+        cuisine_type VARCHAR(50) NOT NULL,
+        phone_number VARCHAR(20),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT valid_latitude CHECK (latitude >= -90 AND latitude <= 90),
+        CONSTRAINT valid_longitude CHECK (longitude >= -180 AND longitude <= 180)
+        );
+
+    -Ajouter les données dans la table
+        INSERT INTO restaurants (name, address, latitude, longitude, cuisine_type, phone_number)
+        VALUES (
+        'Le Comptoir du Relais',
+        '9 Carrefour de l''Odéon, 75006 Paris, France',
+        48.8529,
+        2.3387,
+        'Française',
+        '+33 1 44 27 07 97'
+        );
+
+    -afficher les données
+        SELECT * FROM restaurants;
+
+    -verifier la structure de la table
+        \d restaurants
+
+    -Sortir de PostgreSQL
+        \q
 
 ## Architecture
 App.vue
@@ -134,7 +193,7 @@ vue --version
 5. Configurer l’accès à PostgreSQL
     Dans le backend (.env ou config.js) :
     DB_HOST=localhost
-    DB_PORT=5432
+    DB_PORT=5432 
     DB_NAME=restaurants_db
     DB_USER=restaurant_user
     DB_PASSWORD=motdepasse

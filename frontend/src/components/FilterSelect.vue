@@ -21,7 +21,7 @@ const cuisines = [
       :value="modelValue"
       @change="e => emit('update:modelValue', e.target.value)"
     >
-      <option value="">Toutes</option>
+      <option value="">Cuisine</option>
       <option
         v-for="cuisine in cuisines"
         :key="cuisine"

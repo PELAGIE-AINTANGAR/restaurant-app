@@ -25,6 +25,7 @@ const fetchRestaurants = async () => {
   }
 };
 
+// Mettre à jour les suggestions en fonction de la recherche et du filtre
 const updateSuggestions = () => {
   suggestions.value = restaurants.value.filter(r => {
 
@@ -69,7 +70,7 @@ onMounted(fetchRestaurants);
       <RestaurantList :restaurants="restaurants" />
     </div>
 
-    <!-- Suggestions -->
+
     <div v-if="searchQuery || cuisineFilter" class="suggestions">
       <p v-if="suggestions.length === 0">Aucun résultat</p>
 

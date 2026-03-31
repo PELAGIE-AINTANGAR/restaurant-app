@@ -24,31 +24,6 @@ async function createRestaurant(req, res) {
     res.status(400).json({ message: error.message });  }
 }
 
-async function updateRestaurant(req, res) {
-  try {
-    const restaurant = await services.updateRestaurant(req.params.id, req.body);
-    if (restaurant) {
-      res.json(restaurant);
-    } else {
-      res.status(404).json({ error: 'Restaurant not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to update restaurant' });
-  }
-}
-
-async function deleteRestaurant(req, res) {
-  try {
-    const success = await services.deleteRestaurant(req.params.id);
-    if (success) {
-      res.json({ message: 'Restaurant deleted' });
-    } else {
-      res.status(404).json({ error: 'Restaurant not found' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to delete restaurant' });
-  }
-}
 
 async function searchRestaurants(req, res) {
   const query = req.query.q || '';
@@ -77,8 +52,6 @@ async function filterRestaurants(req, res) {
 module.exports = {
   getAllRestaurants,
   createRestaurant,
-  updateRestaurant,
-  deleteRestaurant,
   searchRestaurants,
   filterRestaurants
 };

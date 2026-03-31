@@ -15,7 +15,6 @@ const restform = ref({
     phone_number: ''
 });
 
-// Erreurs pour chaque champ
 const errors = ref({});
 
 // Validation complète
@@ -51,7 +50,6 @@ const validateForm = () => {
   return Object.keys(errors.value).length === 0;
 };
 
-// Soumission
 const submitForm = async () => {
   if (!validateForm()) return;
 
@@ -79,10 +77,10 @@ const submitForm = async () => {
 
 <template>
   <div class="restaurant-form">
-    <h2>Add a New Restaurant</h2>
+    <h2>Ajouter un Restaurant</h2>
     <form @submit.prevent="submitForm">
       <div class="form-group">
-        <label for="name">Name:</label>
+        <label for="name">Nom:</label>
         <input type="text" id="name" v-model="restform.name" />
         <span class="error" v-if="errors.name">{{ errors.name }}</span>
       </div>
@@ -106,18 +104,18 @@ const submitForm = async () => {
       </div>
 
       <div class="form-group">
-        <label for="cuisine_type">Cuisine Type:</label>
+        <label for="cuisine_type">Type_Cuisine:</label>
         <FilterSelect v-model="restform.cuisine_type" />
         <span class="error" v-if="errors.cuisine_type">{{ errors.cuisine_type }}</span>
       </div>
 
       <div class="form-group">
-        <label for="phone_number">Phone Number:</label>
+        <label for="phone_number">Numéro de Téléphone:</label>
         <input type="text" id="phone_number" v-model="restform.phone_number" />
         <span class="error" v-if="errors.phone_number">{{ errors.phone_number }}</span>
       </div>
 
-      <button type="submit">Add Restaurant</button>
+      <button type="submit">Ajouter un Restaurant</button>
     </form>
   </div>
 </template>
