@@ -16,6 +16,9 @@ const restform = ref({
 });
 
 const errors = ref({});
+function isInParis(lat, lon) {
+  return lat >= 48.82 && lat <= 48.90 && lon >= 2.22 && lon <= 2.47;
+}
 
 // Validation complète
 const validateForm = () => {
@@ -37,6 +40,11 @@ const validateForm = () => {
   const lon = parseFloat(restform.value.longitude);
   if (isNaN(lon) || lon < -180 || lon > 180) {
     errors.value.longitude = 'La longitude doit être comprise entre -180 et 180';
+  }
+  
+   if (isInParis(lat, lon)) {
+    errors.value.latitude = 'Les coordonnées doivent être en dehors de Paris';
+    errors.value.longitude = 'Les coordonnées doivent être en dehors de Paris';
   }
 
   if (!restform.value.cuisine_type) {

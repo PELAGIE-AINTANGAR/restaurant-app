@@ -28,6 +28,9 @@ function validateRestaurant(data) {
     errors.push('Longitude must be between -180 and 180');
   }
 
+  if (lat >= 48.82 && lat <= 48.90 && lon >= 2.22 && lon <= 2.47) {
+    errors.push('Coordinates must be within Paris');
+  }
   const cuisines = [
     'Française',
     'Italienne',
